@@ -34,6 +34,9 @@ public class SimulateTask {
     @Autowired
     private LhasaAirPollutantsConcentrationServiceImpl lsService;
 
+    /**
+     * 模拟数据生成，并存储值至数据库
+     */
     public void simulatePredictionStore() {
         System.out.println("模拟生成数据，存储");
 
