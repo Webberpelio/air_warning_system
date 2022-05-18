@@ -25,7 +25,7 @@ public class ResultProUtil {
      * @param head 标记，该值为true时补足头部，否则补足尾部
      * @return
      */
-    public static List<AirPollutantsConcentrationVO> supplyAirPollutantsConcentrationQuality(LocalDate preDate, LocalDate postDate, boolean head) {
+    private static List<AirPollutantsConcentrationVO> supplyAirPollutantsConcentrationQuality(LocalDate preDate, LocalDate postDate, boolean head) {
         List<AirPollutantsConcentrationVO> res = new ArrayList<>();
         //间隔日数
         long dateSpan = DateProUtil.dateSpan(preDate, postDate);
@@ -78,7 +78,7 @@ public class ResultProUtil {
      * @param head 标记，该值为true时补足头部，否则补足尾部
      * @return
      */
-    public static List<AirPollutantVO> supplyAirPollutantConcentration(LocalDate preDate, LocalDate postDate, boolean head) {
+    private static List<AirPollutantVO> supplyAirPollutantConcentration(LocalDate preDate, LocalDate postDate, boolean head) {
         List<AirPollutantVO> res = new ArrayList<>();
         long dateSpan = DateProUtil.dateSpan(preDate, postDate);
         int start = 0;
@@ -126,7 +126,7 @@ public class ResultProUtil {
      * @param head 标记，该值为true时补足头部，否则补足尾部
      * @return
      */
-    public static List<AirQualityVO> supplyAirQuality(LocalDate preDate, LocalDate postDate, boolean head) {
+    private static List<AirQualityVO> supplyAirQuality(LocalDate preDate, LocalDate postDate, boolean head) {
         List<AirQualityVO> res = new ArrayList<>();
         long dateSpan = DateProUtil.dateSpan(preDate, postDate);
         int start = 0;

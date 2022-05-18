@@ -1,5 +1,6 @@
 package com.air_research.airwarningsystem.harbin.service.impl;
 
+import com.air_research.airwarningsystem.guangzhou.entity.GuangzhouAirPollutantsConcentration;
 import com.air_research.airwarningsystem.harbin.entity.HarbinAirPollutantsConcentration;
 import com.air_research.airwarningsystem.harbin.mapper.HarbinAirPollutantsConcentrationMapper;
 import com.air_research.airwarningsystem.harbin.service.IHarbinAirPollutantsConcentrationService;
@@ -112,5 +113,13 @@ public class HarbinAirPollutantsConcentrationServiceImpl extends ServiceImpl<Har
         ResultProUtil.airQualitySupplement(res, dateFrom, dateTo);
 
         return res;
+    }
+
+    /**
+     * 提交新预测信息
+     * @param record 新的预测信息
+     */
+    public void addNewPredictedRecord(HarbinAirPollutantsConcentration record) {
+        mapper.insert(record);
     }
 }

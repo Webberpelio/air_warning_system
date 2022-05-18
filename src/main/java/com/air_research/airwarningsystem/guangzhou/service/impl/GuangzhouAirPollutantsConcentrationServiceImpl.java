@@ -113,4 +113,12 @@ public class GuangzhouAirPollutantsConcentrationServiceImpl extends ServiceImpl<
 
         return res;
     }
+
+    /**
+     * 提交新预测信息
+     * @param record 新的预测信息
+     */
+    public void addNewPredictedRecord(GuangzhouAirPollutantsConcentration record) {
+        mapper.insert(record);
+    }
 }

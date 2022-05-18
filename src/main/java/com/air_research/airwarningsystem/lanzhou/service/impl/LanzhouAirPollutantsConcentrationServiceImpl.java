@@ -1,5 +1,6 @@
 package com.air_research.airwarningsystem.lanzhou.service.impl;
 
+import com.air_research.airwarningsystem.guangzhou.entity.GuangzhouAirPollutantsConcentration;
 import com.air_research.airwarningsystem.lanzhou.entity.LanzhouAirPollutantsConcentration;
 import com.air_research.airwarningsystem.lanzhou.mapper.LanzhouAirPollutantsConcentrationMapper;
 import com.air_research.airwarningsystem.lanzhou.service.ILanzhouAirPollutantsConcentrationService;
@@ -112,5 +113,13 @@ public class LanzhouAirPollutantsConcentrationServiceImpl extends ServiceImpl<La
         ResultProUtil.airQualitySupplement(res, dateFrom, dateTo);
 
         return res;
+    }
+
+    /**
+     * 提交新预测信息
+     * @param record 新的预测信息
+     */
+    public void addNewPredictedRecord(LanzhouAirPollutantsConcentration record) {
+        mapper.insert(record);
     }
 }

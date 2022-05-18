@@ -1,5 +1,6 @@
 package com.air_research.airwarningsystem.lhasa.service.impl;
 
+import com.air_research.airwarningsystem.guangzhou.entity.GuangzhouAirPollutantsConcentration;
 import com.air_research.airwarningsystem.lhasa.entity.LhasaAirPollutantsConcentration;
 import com.air_research.airwarningsystem.lhasa.mapper.LhasaAirPollutantsConcentrationMapper;
 import com.air_research.airwarningsystem.lhasa.service.ILhasaAirPollutantsConcentrationService;
@@ -112,5 +113,13 @@ public class LhasaAirPollutantsConcentrationServiceImpl extends ServiceImpl<Lhas
         ResultProUtil.airQualitySupplement(res, dateFrom, dateTo);
 
         return res;
+    }
+
+    /**
+     * 提交新预测信息
+     * @param record 新的预测信息
+     */
+    public void addNewPredictedRecord(LhasaAirPollutantsConcentration record) {
+        mapper.insert(record);
     }
 }
