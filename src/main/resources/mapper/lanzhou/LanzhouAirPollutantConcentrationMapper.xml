@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air_research.airwarningsystem.lanzhou.mapper.LanzhouAirPollutantsConcentrationMapper">
+
+    <select id="getByPollutant" resultType="com.air_research.airwarningsystem.vo.AirPollutantVO">
+        select pred_date as 'date',
+        <if test="pollutant=='pm25'">
+            pm25 as 'pollutantConcentration'
+        </if>
+        <if test="pollutant=='pm10'">
+            pm10 as 'pollutantConcentration'
+        </if>
+        <if test="pollutant=='so2'">
+            so2 as 'pollutantConcentration'
+        </if>
+        <if test="pollutant=='co'">
+            co as 'pollutantConcentration'
+        </if>
+        <if test="pollutant=='no2'">
+            no2 as 'pollutantConcentration'
+        </if>
+        <if test="pollutant=='o3'">
+            o3 as 'pollutantConcentration'
+        </if>
+        from tb_lanzhou_air_pollutants_concentration
+        where pred_date &gt;= #{fromDate} and pred_date &lt;= #{toDate}
+    </select>
+
+    <select id="getAirQuality" resultType="com.air_research.airwarningsystem.vo.AirQualityVO">
+        select pred_date as 'date', aq_level as 'airQualityLevel'
+        from tb_lanzhou_air_pollutants_concentration
+        where pred_date &gt;= #{fromDate} and pred_date &lt;= #{toDate}
+    </select>
+</mapper>
