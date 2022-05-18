@@ -1,1 +1,4 @@
-*.xml linguist-language=java
+* text=auto
+*.css linguist-vendored
+*.scss linguist-vendored
+*.js linguist-vendored
