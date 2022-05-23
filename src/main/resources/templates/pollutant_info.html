@@ -3,6 +3,7 @@
 <head>
     <title>Air pollutants concentration prediction</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/present.css">
 </head>
 <script type="text/javascript" src="/js/echarts.js"></script>
 <body>
@@ -22,10 +23,11 @@
     </tbody>
 </table>
 
-<div id="main" style="width: 600px;height:400px;"></div>
+<!--<div id="main" style="width: 700px;height:400px;"></div>-->
+<div id="main" class="curve"></div>
 
 <script th:inline="javascript">
-    // 基于准备好的dom，初始化echarts实例
+    //基于服务端返回的响应数据，准备绘图所需数据
     var resList = [[${res}]];
     var dateList = [];
     var pollutantConcentrationList = [];
@@ -33,17 +35,21 @@
     resList.forEach(item => {pollutantConcentrationList.push(item.pollutantConcentration)});
 
     var draw = function(containerId, dataList, legend, xLegend) {
-        // 基于准备好的dom，初始化echarts实例
+        //基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById(containerId));
 
-        // 指定图表的配置项和数据
+        if (legend == 'pm25') legend = 'pm2.5';
+
+        //指定图表的配置项和数据
         var option = {
             title: {
-                text: 'ECharts 入门示例'
+                text: '空气污染物浓度历史预测--' + legend.toUpperCase(),
+                left: 'center'
             },
             tooltip: {},
             legend: {
-                data: [legend]
+                data: [legend],
+                show: false
             },
             xAxis: {
                 data: xLegend
@@ -53,12 +59,13 @@
                 {
                     name: legend,
                     type: 'line',
+                    smooth: true,
                     data: dataList
                 }
             ]
         };
 
-        // 使用刚指定的配置项和数据显示图表。
+        //使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     }
 

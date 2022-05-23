@@ -3,6 +3,7 @@
 <head>
     <title>Air pollutants concentration prediction</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/present.css">
 </head>
 <script type="text/javascript" src="/js/echarts.js"></script>
 <body>
@@ -34,16 +35,23 @@
     </tbody>
 </table>
 
-<div id="main" style="width: 600px;height:400px;"></div>
-<div id="two" style="width: 600px;height:400px;"></div>
-<div id="three" style="width: 600px;height:400px;"></div>
-<div id="four" style="width: 600px;height:400px;"></div>
-<div id="five" style="width: 600px;height:400px;"></div>
-<div id="six" style="width: 600px;height:400px;"></div>
-<div id="seven" style="width: 600px;height:400px;"></div>
+<!--<div id="main" style="width: 700px;height:400px;"></div>
+<div id="two" style="width: 700px;height:400px;"></div>
+<div id="three" style="width: 700px;height:400px;"></div>
+<div id="four" style="width: 700px;height:400px;"></div>
+<div id="five" style="width: 700px;height:400px;"></div>
+<div id="six" style="width: 700px;height:400px;"></div>
+<div id="seven" style="width: 700px;height:400px;"></div>-->
+<div id="main" class="curve"></div>
+<div id="two" class="curve"></div>
+<div id="three" class="curve"></div>
+<div id="four" class="curve"></div>
+<div id="five" class="curve"></div>
+<div id="six" class="curve"></div>
+<div id="seven" class="curve"></div>
 
 <script th:inline="javascript">
-    // 基于准备好的dom，初始化echarts实例
+    //基于服务端返回的响应数据，准备绘图所需数据
     var resList = [[${res}]];
     var dateList = [];
     var pm25List = [];
@@ -62,43 +70,52 @@
     resList.forEach(item => {o3List.push(item.o3)});
     resList.forEach(item => {aqList.push(item.aqLevel)});
 
-    var draw = function(containerId, dataList, legend, xLegend) {
-        // 基于准备好的dom，初始化echarts实例
+    var draw = function(containerId, dataList, legend, xLegend, titleText) {
+        //基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById(containerId));
+        var yAxisFormatter = '{value} ug/m3'
+        if (legend == 'co') yAxisFormatter = '{value} mg/m3'
 
-        // 指定图表的配置项和数据
+        //指定图表的配置项和数据
         var option = {
             title: {
-                text: 'ECharts 入门示例'
+                text: titleText,
+                left: 'center'
             },
             tooltip: {},
             legend: {
-                data: [legend]
+                data: [legend],
+                show: false
             },
             xAxis: {
                 data: xLegend
             },
-            yAxis: {},
+            yAxis: {
+                axisLabel: {
+                    formatter: yAxisFormatter
+                }
+            },
             series: [
                 {
                     name: legend,
                     type: 'line',
+                    smooth: true,
                     data: dataList
                 }
             ]
         };
 
-        // 使用刚指定的配置项和数据显示图表。
+        //使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     }
 
-    draw("main", pm25List, "pm2.5", dateList);
-    draw("two", pm10List, "pm10", dateList);
-    draw("three", so2List, "so2", dateList);
-    draw("four", coList, "co", dateList);
-    draw("five", no2List, "no2", dateList);
-    draw("six", o3List, "o3", dateList);
-    draw("seven", aqList, "AQLevel", dateList);
+    draw("main", pm25List, "pm2.5", dateList, "空气污染物浓度预测--PM2.5");
+    draw("two", pm10List, "pm10", dateList, "空气污染物浓度预测--PM10");
+    draw("three", so2List, "so2", dateList, "空气污染物浓度预测--SO2");
+    draw("four", coList, "co", dateList, "空气污染物浓度预测--CO");
+    draw("five", no2List, "no2", dateList, "空气污染物浓度预测--NO2");
+    draw("six", o3List, "o3", dateList, "空气污染物浓度预测--O3");
+    draw("seven", aqList, "AQLevel", dateList, "空气质量等级");
 </script>
 </body>
 </html>
