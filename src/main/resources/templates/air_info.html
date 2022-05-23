@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Air pollutants concentration prediction</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script type="text/javascript" src="/js/echarts.js"></script>
+<body>
+<p th:text="'这里是' + ${city} + '!'" />
+<table>
+    <thead>
+    <tr>
+        <th>日期</th>
+        <th>PM2.5</th>
+        <th>PM10</th>
+        <th>SO2</th>
+        <th>CO</th>
+        <th>NO2</th>
+        <th>O3</th>
+        <th>Air Quality Level</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="record : ${res}">
+        <td th:text="${record.predDate}"></td>
+        <td th:text="${record.pm25}"></td>
+        <td th:text="${record.pm10}"></td>
+        <td th:text="${record.so2}"></td>
+        <td th:text="${record.co}"></td>
+        <td th:text="${record.no2}"></td>
+        <td th:text="${record.o3}"></td>
+        <td th:text="${record.aqLevel}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div id="main" style="width: 600px;height:400px;"></div>
+<div id="two" style="width: 600px;height:400px;"></div>
+<div id="three" style="width: 600px;height:400px;"></div>
+<div id="four" style="width: 600px;height:400px;"></div>
+<div id="five" style="width: 600px;height:400px;"></div>
+<div id="six" style="width: 600px;height:400px;"></div>
+<div id="seven" style="width: 600px;height:400px;"></div>
+
+<script th:inline="javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var resList = [[${res}]];
+    var dateList = [];
+    var pm25List = [];
+    var pm10List = [];
+    var so2List = [];
+    var coList = [];
+    var no2List = [];
+    var o3List = [];
+    var aqList = [];
+    resList.forEach(item => {dateList.push(item.predDate)});
+    resList.forEach(item => {pm25List.push(item.pm25)});
+    resList.forEach(item => {pm10List.push(item.pm10)});
+    resList.forEach(item => {so2List.push(item.so2)});
+    resList.forEach(item => {coList.push(item.co)});
+    resList.forEach(item => {no2List.push(item.no2)});
+    resList.forEach(item => {o3List.push(item.o3)});
+    resList.forEach(item => {aqList.push(item.aqLevel)});
+
+    var draw = function(containerId, dataList, legend, xLegend) {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById(containerId));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data: [legend]
+            },
+            xAxis: {
+                data: xLegend
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: legend,
+                    type: 'line',
+                    data: dataList
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    draw("main", pm25List, "pm2.5", dateList);
+    draw("two", pm10List, "pm10", dateList);
+    draw("three", so2List, "so2", dateList);
+    draw("four", coList, "co", dateList);
+    draw("five", no2List, "no2", dateList);
+    draw("six", o3List, "o3", dateList);
+    draw("seven", aqList, "AQLevel", dateList);
+</script>
+</body>
+</html>

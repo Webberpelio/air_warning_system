@@ -61,10 +61,6 @@ public class Swagger2 {
                 .build();
     }
 
-    /**
-     * 创建API基本信息
-     * @return
-     */
     private ApiInfo apiInfo(String title, String description) {
         return new ApiInfoBuilder()
                 .title(title)

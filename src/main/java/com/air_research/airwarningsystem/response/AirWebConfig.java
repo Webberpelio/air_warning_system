@@ -19,8 +19,10 @@ import java.util.Collections;
 @Configuration
 public class AirWebConfig implements WebMvcConfigurer {
 
+
     /**
-     * 跨域
+     * 跨越
+     * @param registry
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -34,6 +36,7 @@ public class AirWebConfig implements WebMvcConfigurer {
 
     /**
      * 拦截器
+     * @return
      */
     @Bean
     public AirInterceptor getAirInterceptor() {

@@ -21,12 +21,6 @@ public enum ResultEnum {
     private Integer code;
     private String message;
 
-    /**
-     * 枚举类的构造方法默认为private访问权限
-     * @param success
-     * @param code
-     * @param message
-     */
     private ResultEnum(boolean success, Integer code, String message) {
         this.success = success;
         this.code = code;

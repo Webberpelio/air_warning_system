@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Air pollutants concentration prediction</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script type="text/javascript" src="/js/echarts.js"></script>
+<body>
+<p th:text="'这里是' + ${city} + '!'" />
+<table>
+    <thead>
+    <tr>
+        <th>日期</th>
+        <th th:text="${pollutant}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="record : ${res}">
+        <td th:text="${record.date}"></td>
+        <td th:text="${record.pollutantConcentration}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div id="main" style="width: 600px;height:400px;"></div>
+
+<script th:inline="javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var resList = [[${res}]];
+    var dateList = [];
+    var pollutantConcentrationList = [];
+    resList.forEach(item => {dateList.push(item.date)});
+    resList.forEach(item => {pollutantConcentrationList.push(item.pollutantConcentration)});
+
+    var draw = function(containerId, dataList, legend, xLegend) {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById(containerId));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data: [legend]
+            },
+            xAxis: {
+                data: xLegend
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: legend,
+                    type: 'line',
+                    data: dataList
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    draw("main", pollutantConcentrationList, [[${pollutant}]], dateList);
+</script>
+</body>
+</html>

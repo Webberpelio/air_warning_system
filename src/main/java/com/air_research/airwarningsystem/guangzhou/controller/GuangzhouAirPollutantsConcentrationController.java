@@ -9,10 +9,12 @@ import com.air_research.airwarningsystem.vo.AirQualityVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,44 +26,57 @@ import java.util.List;
  * @author Wilson Zhang
  * @since 2022-05-17
  */
-@Api(tags = "空气污染物浓度预测查访API")
-@RestController
+@Api(tags = "空气污染物浓度和空气质量等级信息获取API")
+@Controller
 @RequestMapping("/guangzhou-air-pollutants-concentration")
 public class GuangzhouAirPollutantsConcentrationController {
 
     @Autowired
     private GuangzhouAirPollutantsConcentrationServiceImpl service;
 
-    @ApiOperation("空气污染物浓度预测值")
+    @ApiOperation("空气污染物浓度和空气质量等级预测结果")
     @GetMapping("/get_by_date")
-    public GuangzhouAirPollutantsConcentration getByDate(String date) {
+    public String getByDate(@RequestParam(name = "date") String date, Model model) {
         GuangzhouAirPollutantsConcentration res = service.getByDate(date);
 
-        return res;
+        model.addAttribute("city", "广州");
+        model.addAttribute("res", res);
+
+        return "display";
     }
 
-    @ApiOperation("空气污染物浓度历史数据")
+    @ApiOperation("空气污染物浓度和空气质量等级历史预测数据")
     @GetMapping("/get_from_dates")
-    public List<AirPollutantsConcentrationVO> getFromDates(String fromDate, String toDate) {
+    public String getFromDates(String fromDate, String toDate, Model model) {
         List<AirPollutantsConcentrationVO> res = service.getFromDates(fromDate, toDate);
 
-        return res;
+        model.addAttribute("city", "广州");
+        model.addAttribute("res", res);
+
+        return "air_info";
     }
 
     @ApiOperation("某空气污染物浓度历史数据")
     @GetMapping("/get_by_pollutant")
-    public List<AirPollutantVO> getByPollutant(String pollutant, String fromDate, String toDate) {
+    public String getByPollutant(String pollutant, String fromDate, String toDate, Model model) {
         List<AirPollutantVO> res = service.getByPollutant(pollutant, fromDate, toDate);
 
-        return res;
+        model.addAttribute("city", "广州");
+        model.addAttribute("pollutant", pollutant);
+        model.addAttribute("res", res);
+
+        return "pollutant_info";
     }
 
     @ApiOperation("空气质量等级历史数据")
     @GetMapping("/get_air_quality")
-    public List<AirQualityVO> getAirQuality(String fromDate, String toDate) {
+    public String getAirQuality(String fromDate, String toDate, Model model) {
         List<AirQualityVO> res = service.getAirQuality(fromDate, toDate);
 
-        return res;
+        model.addAttribute("city", "广州");
+        model.addAttribute("res", res);
+
+        return "air_quality_level_info";
     }
 }
 

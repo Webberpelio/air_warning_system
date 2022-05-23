@@ -40,7 +40,7 @@ public class SimulateTask {
     public void simulatePredictionStore() {
         System.out.println("模拟生成数据，存储");
 
-        LocalDate date = LocalDate.now().minusDays(5);
+        LocalDate date = LocalDate.now().plusDays(5);
         int dateSpan = 100;
 
         gzService.saveBatch(randomCreateGZ(date, dateSpan));

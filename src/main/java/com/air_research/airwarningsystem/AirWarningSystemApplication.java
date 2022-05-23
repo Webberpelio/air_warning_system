@@ -22,11 +22,11 @@ public class AirWarningSystemApplication {
         SpringApplication.run(AirWarningSystemApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     public CommandLineRunner run() {
         return args -> {
             //模拟生成数据，以供程序运行展示系统功能
             simulateTask.simulatePredictionStore();
         };
-    }
+    }*/
 }
