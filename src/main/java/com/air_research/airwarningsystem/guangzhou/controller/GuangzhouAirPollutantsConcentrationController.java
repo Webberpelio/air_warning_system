@@ -3,6 +3,7 @@ package com.air_research.airwarningsystem.guangzhou.controller;
 
 import com.air_research.airwarningsystem.guangzhou.entity.GuangzhouAirPollutantsConcentration;
 import com.air_research.airwarningsystem.guangzhou.service.impl.GuangzhouAirPollutantsConcentrationServiceImpl;
+import com.air_research.airwarningsystem.util.PollutantNameTransUtil;
 import com.air_research.airwarningsystem.vo.AirPollutantVO;
 import com.air_research.airwarningsystem.vo.AirPollutantsConcentrationVO;
 import com.air_research.airwarningsystem.vo.AirQualityVO;
@@ -72,7 +73,7 @@ public class GuangzhouAirPollutantsConcentrationController {
         List<AirPollutantVO> res = service.getByPollutant(pollutant, fromDate, toDate);
 
         model.addAttribute("city", "广州");
-        model.addAttribute("pollutant", pollutant);
+        model.addAttribute("pollutant", PollutantNameTransUtil.transName(pollutant));
         model.addAttribute("res", res);
 
         return "pollutant_info";

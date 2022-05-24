@@ -3,6 +3,7 @@ package com.air_research.airwarningsystem.lhasa.controller;
 
 import com.air_research.airwarningsystem.lhasa.entity.LhasaAirPollutantsConcentration;
 import com.air_research.airwarningsystem.lhasa.service.impl.LhasaAirPollutantsConcentrationServiceImpl;
+import com.air_research.airwarningsystem.util.PollutantNameTransUtil;
 import com.air_research.airwarningsystem.vo.AirPollutantVO;
 import com.air_research.airwarningsystem.vo.AirPollutantsConcentrationVO;
 import com.air_research.airwarningsystem.vo.AirQualityVO;
@@ -65,12 +66,12 @@ public class LhasaAirPollutantsConcentrationController {
     }
 
     @ApiOperation("某空气污染物浓度历史数据")
-    @GetMapping("/get_pollutant")
+    @GetMapping("/get_by_pollutant")
     public String getByPollutant(String pollutant, String fromDate, String toDate, Model model) {
         List<AirPollutantVO> res = service.getByPollutant(pollutant, fromDate, toDate);
 
         model.addAttribute("city", "拉萨");
-        model.addAttribute("pollutant", pollutant);
+        model.addAttribute("pollutant", PollutantNameTransUtil.transName(pollutant));
         model.addAttribute("res", res);
 
         return "pollutant_info";

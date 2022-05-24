@@ -8,7 +8,7 @@
 <script type="text/javascript" src="/js/echarts.js"></script>
 <body>
 <p class="para_style" th:text="'这里是' + ${city} + '!'" />
-<div>
+<div style="margin: 80px auto">
     <table>
         <thead>
         <tr>
@@ -40,12 +40,13 @@
         //基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById(containerId));
 
-        if (legend == 'pm25') legend = 'pm2.5';
+        /*if (legend == 'pm25') legend = 'pm2.5';*/
 
         //指定图表的配置项和数据
         var option = {
             title: {
-                text: '空气污染物浓度历史预测--' + legend.toUpperCase(),
+                /*text: '空气污染物浓度历史预测--' + legend.toUpperCase(),*/
+                text: '空气污染物浓度历史预测--' + legend,
                 left: 'center'
             },
             tooltip: {},

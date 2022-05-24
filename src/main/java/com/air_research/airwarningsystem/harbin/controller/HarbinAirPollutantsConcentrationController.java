@@ -3,6 +3,7 @@ package com.air_research.airwarningsystem.harbin.controller;
 
 import com.air_research.airwarningsystem.harbin.entity.HarbinAirPollutantsConcentration;
 import com.air_research.airwarningsystem.harbin.service.impl.HarbinAirPollutantsConcentrationServiceImpl;
+import com.air_research.airwarningsystem.util.PollutantNameTransUtil;
 import com.air_research.airwarningsystem.vo.AirPollutantVO;
 import com.air_research.airwarningsystem.vo.AirPollutantsConcentrationVO;
 import com.air_research.airwarningsystem.vo.AirQualityVO;
@@ -70,7 +71,7 @@ public class HarbinAirPollutantsConcentrationController {
         List<AirPollutantVO> res = service.getByPollutant(pollutant, fromDate, toDate);
 
         model.addAttribute("city", "哈尔滨");
-        model.addAttribute("pollutant", pollutant);
+        model.addAttribute("pollutant", PollutantNameTransUtil.transName(pollutant));
         model.addAttribute("res", res);
 
         return "pollutant_info";

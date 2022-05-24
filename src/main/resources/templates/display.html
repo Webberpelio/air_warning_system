@@ -7,7 +7,68 @@
 </head>
 <body>
 <p class="para_style" th:text="'这里是' + ${city} + '!'" />
-<div>
+<div class="query_choose">
+    起始日期<input id="fromDateHist" type="text" />
+    终止日期<input id="toDateHist" type="text"/>
+    <a id="hist" href="" target="_blank">
+        <input type="button" value="空气污染物浓度和空气质量等级历史预测" onclick="getFromDates()" />
+    </a>
+</div>
+<hr>
+<div class="query_choose">
+    起始日期<input id="fromDatePollut" type="text"/>
+    终止日期<input id="toDatePollut" type="text"/>
+    污染物<select id="pollut">
+            <option value="pm25">PM2.5</option>
+            <option value="pm10">PM10</option>
+            <option value="so2">SO2</option>
+            <option value="co">CO</option>
+            <option value="no2">NO2</option>
+            <option value="o3">O3</option>
+        </select>
+    <a id="pollutant" href="" target="_blank">
+        <input type="button" value="空气污染物浓度历史预测" onclick="getByPollutant()" />
+    </a>
+</div>
+<hr>
+<div class="query_choose">
+    起始日期<input id="fromDateAqi" type="text"/>
+    终止日期<input id="toDateAqi" type="text"/>
+    <a id="aqi" href="" target="_blank">
+        <input type="button" value="空气质量等级历史预测" onclick="getAirQuality()" />
+    </a>
+</div>
+
+<script type="text/javascript">
+    var loc = window.location.href;
+    console.log("当前URL: " + loc);
+
+    var link_hist = document.getElementById('hist');
+    var link_pollutant = document.getElementById('pollutant');
+    var link_aqi = document.getElementById('aqi');
+
+    function getFromDates() {
+        link_hist.setAttribute('href', 'get_from_dates?fromDate=' + document.getElementById('fromDateHist').value
+            + '&toDate=' + document.getElementById('toDateHist').value);
+        console.log("起始日期" + document.getElementById('fromDateHist').value);
+        console.log(link_hist.getAttribute('href'));
+    }
+
+    function getByPollutant() {
+        link_pollutant.setAttribute('href', 'get_by_pollutant?fromDate='
+            + document.getElementById('fromDatePollut').value
+            + '&pollutant=' + document.getElementById('pollut').value
+            + '&toDate=' + document.getElementById('toDatePollut').value);
+        console.log(link_pollutant.getAttribute('href'));
+    }
+
+    function getAirQuality() {
+        link_aqi.setAttribute('href', 'get_air_quality?fromDate=' + document.getElementById('fromDateAqi').value
+            + '&toDate=' + document.getElementById('toDateAqi').value);
+        console.log(link_aqi.getAttribute('href'));
+    }
+</script>
+<div style="margin: 80px auto">
     <table>
         <thead>
         <tr>
@@ -18,7 +79,7 @@
             <th>CO</th>
             <th>NO2</th>
             <th>O3</th>
-            <th>Air Quality Level</th>
+            <th>空气质量等级</th>
         </tr>
         </thead>
         <tbody>

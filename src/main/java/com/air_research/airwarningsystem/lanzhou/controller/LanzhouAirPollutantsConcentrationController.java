@@ -3,6 +3,7 @@ package com.air_research.airwarningsystem.lanzhou.controller;
 
 import com.air_research.airwarningsystem.lanzhou.entity.LanzhouAirPollutantsConcentration;
 import com.air_research.airwarningsystem.lanzhou.service.impl.LanzhouAirPollutantsConcentrationServiceImpl;
+import com.air_research.airwarningsystem.util.PollutantNameTransUtil;
 import com.air_research.airwarningsystem.vo.AirPollutantVO;
 import com.air_research.airwarningsystem.vo.AirPollutantsConcentrationVO;
 import com.air_research.airwarningsystem.vo.AirQualityVO;
@@ -70,7 +71,7 @@ public class LanzhouAirPollutantsConcentrationController {
         List<AirPollutantVO> res = service.getByPollutant(pollutant, fromDate, toDate);
 
         model.addAttribute("city", "兰州");
-        model.addAttribute("pollutant", pollutant);
+        model.addAttribute("pollutant", PollutantNameTransUtil.transName(pollutant));
         model.addAttribute("res", res);
 
         return "pollutant_info";
