@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -34,9 +36,17 @@ public class GuangzhouAirPollutantsConcentrationController {
     @Autowired
     private GuangzhouAirPollutantsConcentrationServiceImpl service;
 
+    @Autowired
+    private DateTimeFormatter formatter;
+
     @ApiOperation("空气污染物浓度和空气质量等级预测结果")
     @GetMapping("/get_by_date")
-    public String getByDate(@RequestParam(name = "date") String date, Model model) {
+    public String getByDate(String date, Model model) {
+        if (date == null || date.length() == 0) {
+            date = LocalDate.now().format(formatter);
+            System.out.println(date);
+        }
+
         GuangzhouAirPollutantsConcentration res = service.getByDate(date);
 
         model.addAttribute("city", "广州");

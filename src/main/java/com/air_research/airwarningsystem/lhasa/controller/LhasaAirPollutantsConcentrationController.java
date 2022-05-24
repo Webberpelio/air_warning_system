@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -39,6 +40,11 @@ public class LhasaAirPollutantsConcentrationController {
     @ApiOperation("空气污染物浓度和空气质量等级预测结果")
     @GetMapping("/get_by_date")
     public String getByDate(String date, Model model) {
+        if (date == null || date.length() == 0) {
+            date = LocalDate.now().format(formatter);
+            System.out.println(date);
+        }
+
         LhasaAirPollutantsConcentration res = service.getByDate(date);
 
         model.addAttribute("city", "拉萨");

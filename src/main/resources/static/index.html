@@ -3,22 +3,14 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/present.css">
 </head>
 <body>
-<p>Get your greeting <a href="/greeting">here</a></p>
-<table>
-    <thead>
-    <tr>
-        <th th:text="#{msgs.headers.name}">Name</th>
-        <th th:text="#{msgs.headers.price}">Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="prod: ${allProducts}">
-        <td th:text="${prod.name}">Oranges</td>
-        <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">0.99</td>
-    </tr>
-    </tbody>
+<p class="para_style">Get your greeting from <a href="/guangzhou-air-pollutants-concentration/get_by_date">Guangzhou</a></p>
+<p class="para_style">Get your greeting from <a href="/harbin-air-pollutants-concentration/get_by_date">Harbin</a></p>
+<p class="para_style">Get your greeting from <a href="/lanzhou-air-pollutants-concentration/get_by_date">Lanzhou</a></p>
+<p class="para_style">Get your greeting from <a href="/lhasa-air-pollutants-concentration/get_by_date">Lhasa</a></p>
+
 </table>
 </body>
 </html>
