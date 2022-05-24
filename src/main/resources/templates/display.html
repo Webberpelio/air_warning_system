@@ -3,24 +3,26 @@
 <head>
     <title>Air pollutants concentration prediction</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/present.css">
 </head>
 <body>
 <p th:text="'这里是' + ${city} + '!'" />
 <p th:text="${res}"></p>
-<table>
-    <thead>
-    <tr>
-        <th>日期</th>
-        <th>PM2.5</th>
-        <th>PM10</th>
-        <th>SO2</th>
-        <th>CO</th>
-        <th>NO2</th>
-        <th>O3</th>
-        <th>Air Quality Level</th>
-    </tr>
-    </thead>
-    <tbody>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>日期</th>
+            <th>PM2.5</th>
+            <th>PM10</th>
+            <th>SO2</th>
+            <th>CO</th>
+            <th>NO2</th>
+            <th>O3</th>
+            <th>Air Quality Level</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr>
             <td th:text="${res.predDate}"></td>
             <td th:text="${res.pm25}"></td>
@@ -31,7 +33,8 @@
             <td th:text="${res.o3}"></td>
             <td th:text="${res.aqLevel}"></td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

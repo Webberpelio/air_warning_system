@@ -8,32 +8,34 @@
 <script type="text/javascript" src="/js/echarts.js"></script>
 <body>
 <p th:text="'这里是' + ${city} + '!'" />
-<table>
-    <thead>
-    <tr>
-        <th>日期</th>
-        <th>PM2.5</th>
-        <th>PM10</th>
-        <th>SO2</th>
-        <th>CO</th>
-        <th>NO2</th>
-        <th>O3</th>
-        <th>Air Quality Level</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="record : ${res}">
-        <td th:text="${record.predDate}"></td>
-        <td th:text="${record.pm25}"></td>
-        <td th:text="${record.pm10}"></td>
-        <td th:text="${record.so2}"></td>
-        <td th:text="${record.co}"></td>
-        <td th:text="${record.no2}"></td>
-        <td th:text="${record.o3}"></td>
-        <td th:text="${record.aqLevel}"></td>
-    </tr>
-    </tbody>
-</table>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>日期</th>
+            <th>PM2.5</th>
+            <th>PM10</th>
+            <th>SO2</th>
+            <th>CO</th>
+            <th>NO2</th>
+            <th>O3</th>
+            <th>Air Quality Level</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="record : ${res}">
+            <td th:text="${record.predDate}"></td>
+            <td th:text="${record.pm25}"></td>
+            <td th:text="${record.pm10}"></td>
+            <td th:text="${record.so2}"></td>
+            <td th:text="${record.co}"></td>
+            <td th:text="${record.no2}"></td>
+            <td th:text="${record.o3}"></td>
+            <td th:text="${record.aqLevel}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 <!--<div id="main" style="width: 700px;height:400px;"></div>
 <div id="two" style="width: 700px;height:400px;"></div>

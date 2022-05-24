@@ -8,20 +8,22 @@
 <script type="text/javascript" src="/js/echarts.js"></script>
 <body>
 <p th:text="'这里是' + ${city} + '!'" />
-<table>
-    <thead>
-    <tr>
-        <th>日期</th>
-        <th th:text="${pollutant}"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="record : ${res}">
-        <td th:text="${record.date}"></td>
-        <td th:text="${record.pollutantConcentration}"></td>
-    </tr>
-    </tbody>
-</table>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>日期</th>
+            <th th:text="${pollutant}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="record : ${res}">
+            <td th:text="${record.date}"></td>
+            <td th:text="${record.pollutantConcentration}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 <!--<div id="main" style="width: 700px;height:400px;"></div>-->
 <div id="main" class="curve"></div>

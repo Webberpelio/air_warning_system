@@ -3,3 +3,9 @@
     height: 400px;
     margin: 0 auto;
 }
+
+.table_present {
+    width: 100%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
